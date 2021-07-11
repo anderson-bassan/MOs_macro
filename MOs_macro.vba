@@ -59,5 +59,6 @@ Sub FindMO()
         MsgBox ("MO not found...")
     End If
     
+    Range("C2").Value = ""
     
 End Sub
