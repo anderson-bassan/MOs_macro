@@ -71,7 +71,7 @@ Sub FindMO()
     found_mo = False
 
     ' Delete empty MOs and sort them
-    DeleteEmptyCells (FindLastMO)
+    DeleteEmptyMOs (FindLastMO)
     SortMOs (FindLastMO)
     
     ' Loops through every MO and compare values, if it finds it selects the cell of the MO
