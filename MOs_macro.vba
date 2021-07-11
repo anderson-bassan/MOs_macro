@@ -26,16 +26,30 @@ Sub DeleteEmptyCells(last_cell)
     ' Find and delete all empty cells
     
     Range("A1", "A" & last_cell).SpecialCells(xlCellTypeBlanks).Delete
+    ' To fix: when run with no empty cells generate an error.
 End Sub
 Sub SortMOs(last_mo)
     'Sort Maintence Orders
 
     Range("A1", "A" & last_mo).Sort Key1:=Range("A1"), Order1:=xlAscending, Header:=xlYes
 End Sub
-Sub DummySub()
+Sub FindMO()
     ' Delete empty cells and sorts all them and (TODO) search a MO by number
+
+    Dim mo_number As Long
+    Dim current_mo_value As Long
+
+    mo_number = Range("C2").Value
 
     DeleteEmptyCells (FindLastMO)
     SortMOs (FindLastMO)
+    
+    For i = 2 To FindLastMO
+        current_mo_value = Range("A" & i).Value
+        If current_mo_value = mo_number Then
+            Range("A" & i).Select
+        End If
+        
+    Next i
     
 End Sub
