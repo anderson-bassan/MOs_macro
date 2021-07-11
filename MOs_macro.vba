@@ -38,8 +38,10 @@ Sub FindMO()
 
     Dim mo_number As Long
     Dim current_mo_value As Long
+    Dim found_mo As Boolean
 
     mo_number = Range("C2").Value
+    found_mo = False
 
     DeleteEmptyCells (FindLastMO)
     SortMOs (FindLastMO)
@@ -48,8 +50,14 @@ Sub FindMO()
         current_mo_value = Range("A" & i).Value
         If current_mo_value = mo_number Then
             Range("A" & i).Select
+            found_mo = True
         End If
         
     Next i
+    
+    If found_mo = False Then
+        MsgBox ("MO not found...")
+    End If
+    
     
 End Sub
