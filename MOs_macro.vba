@@ -1,3 +1,11 @@
+' TO-DO
+' * add the AddMO Sub
+' * add the RemoveMo Sub
+'
+'
+' TO-FIX
+' * when running the DeleteEmptyMOs with no empty MOs returns an error.
+'
 
 
 Function FindLastMO() As Integer
@@ -31,12 +39,11 @@ Sub CreateRandomMOs()
 End Sub
 
 
-Sub DeleteEmptyCells(last_cell)
+Sub DeleteEmptyMOs(last_cell)
     ' Find and delete all empty cells
     
     ' Selects all MOs blanks and deletes them
     Range("A1", "A" & last_cell).SpecialCells(xlCellTypeBlanks).Delete
-    ' To fix: when run with no empty cells generates an error.
 
 End Sub
 
