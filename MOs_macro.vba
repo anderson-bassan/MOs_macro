@@ -14,7 +14,6 @@ Function FindLastMO() As Integer
     FindLastMO = last_mo
         
 End Function
-
 Sub CreateRandomMOs()
     ' Create some test data of Maintence Orders (M.Os) to test code
 
@@ -34,7 +33,7 @@ Sub SortMOs(last_mo)
     Range("A1", "A" & last_mo).Sort Key1:=Range("A1"), Order1:=xlAscending, Header:=xlYes
 End Sub
 Sub DummySub()
-    ' Delete empty cells and (TODO) sorts all them and search a MO by number
+    ' Delete empty cells and sorts all them and (TODO) search a MO by number
 
     DeleteEmptyCells (FindLastMO)
     SortMOs (FindLastMO)
