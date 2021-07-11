@@ -28,9 +28,15 @@ Sub DeleteEmptyCells(last_cell)
     
     Range("A1", "A" & last_cell).SpecialCells(xlCellTypeBlanks).Delete
 End Sub
+Sub SortMOs(last_mo)
+    'Sort Maintence Orders
+
+    Range("A1", "A" & last_mo).Sort Key1:=Range("A1"), Order1:=xlAscending, Header:=xlYes
+End Sub
 Sub DummySub()
     ' Delete empty cells and (TODO) sorts all them and search a MO by number
 
     DeleteEmptyCells (FindLastMO)
+    SortMOs (FindLastMO)
     
 End Sub
