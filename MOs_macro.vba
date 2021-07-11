@@ -14,9 +14,13 @@ Function FindLastMO() As Integer
     ' Declare variables
     Dim last_mo As Integer
     Dim current_mo As Long
+    Dim total_cells As Long
     
-    ' Run throught the first 25000 cells until it finds the one with content
-    For i = 25000 To 2 Step -1
+    ' Set the number of cells to check
+    total_cells = 2500
+    
+    ' Run throught the first X (total_cells) cells until it finds the one with content
+    For i = total_cells To 2 Step -1
         If Not IsEmpty(Cells(i, 1)) And last_mo = 0 Then
             last_mo = i
         End If
