@@ -18,12 +18,19 @@ End Function
 Sub CreateRandomMOs()
     ' Create some test data of Maintence Orders (M.Os) to test code
 
-    For i = 2 To 1090
+    For i = 2 To 20
         Cells(i, 1) = "22" & Int((9999 - 1000 + 1) * Math.Rnd() + 1000)
     
     Next i
 End Sub
+Sub DeleteEmptyCells(last_cell)
+    ' Find and delete all empty cells
+    
+    Range("A1", "A" & last_cell).SpecialCells(xlCellTypeBlanks).Delete
+End Sub
 Sub DummySub()
-    Debug.Print FindLastMO
+    ' Delete empty cells and (TODO) sorts all them and search a MO by number
+
+    DeleteEmptyCells (FindLastMO)
     
 End Sub
