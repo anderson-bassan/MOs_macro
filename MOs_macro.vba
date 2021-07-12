@@ -1,7 +1,6 @@
 ' TO-DO
 ' * add function to create back-ups csv files
 ' * add text-boxes instead of excel cells?
-' * add confirmation dialog-box to DelMO Sub
 ' * improve CreateDummyMOs Sub to create full MOs
 ' * improve table to make double click sorts possible
 ' * improve AddMO Sub to make it possible to add full MOs
