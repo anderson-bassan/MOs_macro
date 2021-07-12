@@ -1,6 +1,7 @@
 ' TO-DO
 ' * add the AddMO Sub
 ' * add the RemoveMo Sub
+' * implement quick find to FindLastOM and FindLastOMIndex
 '
 '
 ' TO-FIX
