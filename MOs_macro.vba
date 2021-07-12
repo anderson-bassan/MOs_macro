@@ -3,6 +3,17 @@
 '
 
 
+Sub CreateRandomMOs()
+    ' Create some test data of Maintence Orders (M.Os) to test code
+
+    ' Create random MOs nubmers that start with 22
+    For i = 2 To 20
+        Cells(i, 1) = "22" & Int((9999 - 1000 + 1) * Math.Rnd() + 1000)
+    Next i
+
+End Sub
+
+
 Function FindLastMO() As String
     ' Find the last MO of the spreadsheet and returns it
         
@@ -49,17 +60,6 @@ Function FindLastMOIndex() As Integer
     FindLastMOIndex = last_mo_index
         
 End Function
-
-
-Sub CreateRandomMOs()
-    ' Create some test data of Maintence Orders (M.Os) to test code
-
-    ' Create random MOs nubmers that start with 22
-    For i = 2 To 20
-        Cells(i, 1) = "22" & Int((9999 - 1000 + 1) * Math.Rnd() + 1000)
-    Next i
-
-End Sub
 
 
 Sub DeleteEmptyMOs(last_cell)
