@@ -8,11 +8,11 @@
 '
 
 
-Function FindLastMO() As Integer
+Function FindLastMO() As String
     ' Find the last MO of the spreadsheet and returns it
         
     ' Declare variables
-    Dim last_mo As Integer
+    Dim last_mo As String
     Dim current_mo As Long
     Dim total_cells As Long
     
@@ -21,13 +21,37 @@ Function FindLastMO() As Integer
     
     ' Run throught the first X (total_cells) cells until it finds the one with content
     For i = total_cells To 2 Step -1
-        If Not IsEmpty(Cells(i, 1)) And last_mo = 0 Then
-            last_mo = i
+        If Not IsEmpty(Cells(i, 1)) And last_mo = "" Then
+            last_mo = "A" & i
         End If
     Next i
     
     ' Return the last MO index
     FindLastMO = last_mo
+        
+End Function
+
+
+Function FindLastMOIndex() As Integer
+    ' Find the last MO of the spreadsheet and returns it
+        
+    ' Declare variables
+    Dim last_mo_index As Integer
+    Dim current_mo As Long
+    Dim total_cells As Long
+    
+    ' Set the number of cells to check
+    total_cells = 2500
+    
+    ' Run throught the first X (total_cells) cells until it finds the one with content
+    For i = total_cells To 2 Step -1
+        If Not IsEmpty(Cells(i, 1)) And last_mo = "" Then
+            last_mo_index = i
+        End If
+    Next i
+    
+    ' Return the last MO index
+    FindLastMOIndex = last_mo_index
         
 End Function
 
@@ -47,7 +71,7 @@ Sub DeleteEmptyMOs(last_cell)
     ' Find and delete all empty cells
     
     ' Selects all MOs blanks and deletes them
-    Range("A1", "A" & last_cell).SpecialCells(xlCellTypeBlanks).Delete
+    Range("A1", last_cell).SpecialCells(xlCellTypeBlanks).Delete
 
 End Sub
 
@@ -56,7 +80,7 @@ Sub SortMOs(last_mo)
     'Sort Maintence Orders
 
     ' Sort all MOs
-    Range("A1", "A" & last_mo).Sort Key1:=Range("A1"), Order1:=xlAscending, Header:=xlYes
+    Range("A1", last_mo).Sort Key1:=Range("A1"), Order1:=xlAscending, Header:=xlYes
 
 End Sub
 
@@ -79,7 +103,7 @@ Sub FindMO()
     SortMOs (FindLastMO)
     
     ' Loops through every MO and compare values, if it finds it selects the cell of the MO
-    For i = 2 To FindLastMO
+    For i = 2 To FindLastMOIndex
         current_mo_value = Range("A" & i).Value
         If current_mo_value = mo_number Then
             Range("A" & i).Select
