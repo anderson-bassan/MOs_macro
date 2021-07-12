@@ -170,8 +170,15 @@ Sub DelMO()
         Debug.Print (current_mo_value)
         
         If current_mo_value = mo_number Then
-            Range("A" & i).Delete
-            found_mo = True
+            ' Ask the user if he/she/it is sure that he/she/it wants to delte the MO
+            del_mo_answer = MsgBox("Are you sure? ", vbQuestion + vbYesNo + vbDefaultButton2, "Are you sure?")
+            
+            ' Deletes when users confirm
+            If del_mo_answer = vbYes Then
+                Range("A" & i).Delete
+                found_mo = True
+                
+            End If
             
         End If
     Next i
