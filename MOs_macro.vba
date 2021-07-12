@@ -124,7 +124,7 @@ End Sub
 
 
 Sub AddMO()
-    ' Add an MO to the list then delete empty cells and sorts it
+    ' Add a MO to the list, then delete empty cells and sorts it
     
     ' Declare variables
     Dim mo_number As Long
@@ -141,4 +141,46 @@ Sub AddMO()
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
     SortMOs (FindLastMO)
+    
+End Sub
+
+
+Sub DelMO()
+    ' Delete a MO from the list, then delete empty cells and sorts it
+    
+    ' Declare Variables
+    Dim mo_number As Long
+    Dim current_mo_value As Long
+    Dim found_mo As Boolean
+    
+    ' Set mo_number to the "text box" number
+    mo_number = Range("C6").Value
+    
+    ' Set found_mo to false to check if it was found later
+    found_mo = False
+    
+    ' Loops through every MO and compare values, if it finds it deletes the cell of the MO
+    For i = 2 To FindLastMOIndex
+        current_mo_value = Range("A" & i).Value
+        Debug.Print (current_mo_value)
+        
+        If current_mo_value = mo_number Then
+            Range("A" & i).Delete
+            found_mo = True
+            
+        End If
+    Next i
+    
+    ' Checks if the MO was found, otherwise sends a message
+    If Not found_mo Then
+        MsgBox ("MO was not found...")
+    End If
+    
+    ' Clears the "text box"
+    Range("C6").Value = ""
+    
+    ' Delete empty MOs and sort them
+    DeleteEmptyMOs (FindLastMO)
+    SortMOs (FindLastMO)
+    
 End Sub
