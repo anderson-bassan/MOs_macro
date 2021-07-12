@@ -1,9 +1,13 @@
 ' TO-DO
 ' * implement quick find to FindLastOM and FindLastOMIndex
+' * add function to create back-ups csv files
+' * improve CreateDummyMOs Sub to create full MOs
+' * improve table to make double click sorts possible
+' * improve AddMO Sub to make it possible to add full MOs
 '
 
 
-Sub CreateRandomMOs()
+Sub CreateDummyMOs()
     ' Create some dummy data of Maintence Orders (M.Os) to test code
 
     ' Create random MOs nubmers that start with 22
