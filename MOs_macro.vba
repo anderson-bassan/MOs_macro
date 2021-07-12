@@ -4,7 +4,7 @@
 
 
 Sub CreateRandomMOs()
-    ' Create some test data of Maintence Orders (M.Os) to test code
+    ' Create some dummy data of Maintence Orders (M.Os) to test code
 
     ' Create random MOs nubmers that start with 22
     For i = 2 To 20
