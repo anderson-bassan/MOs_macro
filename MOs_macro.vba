@@ -121,3 +121,24 @@ Sub FindMO()
     Range("C2").Value = ""
     
 End Sub
+
+
+Sub AddMO()
+    ' Add an MO to the list then delete empty cells and sorts it
+    
+    ' Declare variables
+    Dim mo_number As Long
+    
+    ' Get MO number
+    mo_number = Range("C4").Value
+    
+    ' Select the cell where the MO will be add
+    Range("A" & FindLastMOIndex + 1).Value = mo_number
+    
+    ' Clean up "text box"
+    Range("C4").Value = ""
+    
+    ' Delete empty MOs and sort them
+    DeleteEmptyMOs (FindLastMO)
+    SortMOs (FindLastMO)
+End Sub
