@@ -3,10 +3,6 @@
 ' * add the RemoveMo Sub
 ' * implement quick find to FindLastOM and FindLastOMIndex
 '
-'
-' TO-FIX
-' * when running the DeleteEmptyMOs with no empty MOs returns an error.
-'
 
 
 Function FindLastMO() As String
@@ -46,7 +42,7 @@ Function FindLastMOIndex() As Integer
     
     ' Run throught the first X (total_cells) cells until it finds the one with content
     For i = total_cells To 2 Step -1
-        If Not IsEmpty(Cells(i, 1)) And last_mo = "" Then
+        If Not IsEmpty(Cells(i, 1)) And last_mo_index = 0 Then
             last_mo_index = i
         End If
     Next i
@@ -71,8 +67,10 @@ End Sub
 Sub DeleteEmptyMOs(last_cell)
     ' Find and delete all empty cells
     
+    On Error Resume Next
     ' Selects all MOs blanks and deletes them
     Range("A1", last_cell).SpecialCells(xlCellTypeBlanks).Delete
+    On Error GoTo 0
 
 End Sub
 
@@ -106,9 +104,11 @@ Sub FindMO()
     ' Loops through every MO and compare values, if it finds it selects the cell of the MO
     For i = 2 To FindLastMOIndex
         current_mo_value = Range("A" & i).Value
+        
         If current_mo_value = mo_number Then
             Range("A" & i).Select
             found_mo = True
+            
         End If
     Next i
     
