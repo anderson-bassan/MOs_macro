@@ -12,10 +12,29 @@
 Sub CreateDummyMOs()
     ' Create some dummy data of Maintence Orders (M.Os) to test code
 
-    ' Create random MOs nubmers that start with 22
-    For i = 2 To 20
+    ' Declare variables
+    Dim dummy_mo_to_generate As Integer
+    Dim nature_pos As Integer
+    
+    ' Set variables
+    dummy_mo_to_generate = 20
+    nature_pos = 7
+
+    For i = 2 To dummy_mo_to_generate
+    
+        ' Create random MOs nubmers that start with 22
         Cells(i, 1) = "22" & Int((9999 - 1000 + 1) * Math.Rnd() + 1000)
+    
+        ' Create random MOs types
+        If Int((2 - 0) * Math.Rnd() + 1) = 1 Then
+            Cells(i, nature_pos) = "ELE"
+        Else
+            Cells(i, nature_pos) = "MEC"
+        End If
+        
+    
     Next i
+
 
 End Sub
 
@@ -95,10 +114,14 @@ Sub FindMO()
     Dim mo_number As Long
     Dim current_mo_value As Long
     Dim found_mo As Boolean
+    Dim value_location As String
+
+    ' Set the location to retrive values from and to clear later
+    value_location = "J2"
 
     ' Get the MO no. and set found_mo to false so it knows to pop-up the msgbox later in
     ' case it is not found
-    mo_number = Range("C2").Value
+    mo_number = Range(value_location).Value
     found_mo = False
 
     ' Delete empty MOs and sort them
@@ -122,7 +145,7 @@ Sub FindMO()
     End If
     
     ' Clear "search box" after searching
-    Range("C2").Value = ""
+    Range(value_location).Value = ""
     
 End Sub
 
@@ -132,15 +155,19 @@ Sub AddMO()
     
     ' Declare variables
     Dim mo_number As Long
+    Dim value_location As String
+    
+    ' Set the location to retrive values from and to clear later
+    value_location = "J4"
     
     ' Get MO number
-    mo_number = Range("C4").Value
+    mo_number = Range(value_location).Value
     
     ' Select the cell where the MO will be add
     Range("A" & FindLastMOIndex + 1).Value = mo_number
     
     ' Clean up "text box"
-    Range("C4").Value = ""
+    Range(value_location).Value = ""
     
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
@@ -156,9 +183,13 @@ Sub DelMO()
     Dim mo_number As Long
     Dim current_mo_value As Long
     Dim found_mo As Boolean
+    Dim value_location As String
+    
+    ' Set the location to retrive values from and to clear later
+    value_location = "J6"
     
     ' Set mo_number to the "text box" number
-    mo_number = Range("C6").Value
+    mo_number = Range(value_location).Value
     
     ' Set found_mo to false to check if it was found later
     found_mo = False
@@ -188,10 +219,16 @@ Sub DelMO()
     End If
     
     ' Clears the "text box"
-    Range("C6").Value = ""
+    Range(value_location).Value = ""
     
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
     SortMOs (FindLastMO)
+    
+End Sub
+
+
+Sub TestMacro()
+
     
 End Sub
