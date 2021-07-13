@@ -20,6 +20,7 @@ Sub CreateDummyMOs()
     Dim active_pos As Integer
     Dim priority_pos As Integer
     Dim etd_pos As Integer
+    
     Dim nature_type_no As Integer
     Dim line_type_no As Integer
     Dim op_type_no As Integer
@@ -31,12 +32,12 @@ Sub CreateDummyMOs()
     dummy_mo_to_generate = 20
     
     ' Set the colum to write each type of dummy data
-    nature_pos = 7
+    priority_pos = 2
     line_pos = 3
     op_pos = 4
-    type_pos = 6
     active_pos = 5
-    priority_pos = 2
+    type_pos = 6
+    nature_pos = 7
     etd_pos = 8
 
     For i = 2 To dummy_mo_to_generate
@@ -113,7 +114,7 @@ Sub CreateDummyMOs()
         active_type = Cells(i, op_pos).Value
         active_type_no = Int((2 - 0) * Math.Rnd() + 1)
         
-        If active_type = "CARRO TRANS. FER" Then
+        If active_type = "CARRO TRANS. FER." Then
             Cells(i, active_pos) = "CTF"
                
         ElseIf active_type_no = 1 Then
@@ -140,7 +141,7 @@ Sub CreateDummyMOs()
             Cells(i, priority_pos) = "B"
         End If
         
-        ' Get a random number that will be the MO eta type
+        ' Get a random number that will be the MO etd type
         etd_type_no = Int((3 - 0) * Math.Rnd() + 1)
     
         ' Create random MOs types
