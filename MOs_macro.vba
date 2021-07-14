@@ -216,7 +216,10 @@ Sub DeleteEmptyMOs(last_cell)
     
     On Error Resume Next
     ' Selects all MOs blanks and deletes them
-    Range("A1", last_cell).SpecialCells(xlCellTypeBlanks).Delete
+    Range("A1", last_cell).SpecialCells(xlCellTypeBlanks).EntireRow.Delete
+    
+    Debug.Print "inside delteemptymos; last_cell: " & last_cell
+    
     On Error GoTo 0
 
 End Sub
@@ -250,7 +253,7 @@ Sub FindMO()
 
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
-    SortMOs (FindLastMO)
+    ' SortMOs (FindLastMO)
     
     ' Loops through every MO and compare values, if it finds it selects the cell of the MO
     For i = 2 To FindLastMOIndex
@@ -346,7 +349,7 @@ Sub AddMO()
     
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
-    SortMOs (FindLastMO)
+    ' SortMOs (FindLastMO)
     
 End Sub
 
@@ -398,7 +401,7 @@ Sub DelMO()
     
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
-    SortMOs (FindLastMO)
+    ' SortMOs (FindLastMO)
     
 End Sub
 
