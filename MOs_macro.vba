@@ -259,7 +259,7 @@ Sub FindMO()
         current_mo_value = Range("A" & i).Value
         
         If current_mo_value = mo_number Then
-            Range("A" & i).Select
+            Range("A" & i).EntireRow.Select
             found_mo = True
             
         End If
