@@ -2,10 +2,12 @@
 ' * add function to create back-ups csv files
 ' * add text-boxes instead of excel cells?
 ' * improve table to make double click sorts possible
-' * improve AddMO Sub to make it possible to add full MOs
 ' * when sorting MOs by double click show a graphic legend
 ' * implement quick find to FindLastOM and FindLastOMIndex
 '
+' TO-FIX
+' * update delete empty MOs to detect and delete an entire row
+' * update sort MOs to sort the entire MO line and not just the MO no.
 
 
 Sub CreateDummyMOs()
