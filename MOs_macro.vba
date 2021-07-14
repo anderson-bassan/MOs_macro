@@ -382,7 +382,7 @@ Sub DelMO()
             
             ' Deletes when users confirm
             If del_mo_answer = vbYes Then
-                Range("A" & i).Delete
+                Range("A" & i).EntireRow.Delete
                 found_mo = True
                 
             End If
