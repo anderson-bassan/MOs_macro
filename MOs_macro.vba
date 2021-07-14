@@ -276,26 +276,71 @@ Sub AddMO()
     ' Add a MO to the list, then delete empty cells and sorts it
     
     ' Declare variables
+    Dim new_mo_row As Long
+    
     Dim mo_number As Long
+    Dim mo_priority As String
+    Dim mo_line As String
+    Dim mo_op As String
+    Dim mo_active As String
+    Dim mo_type As String
+    Dim mo_nature As String
+    Dim mo_etd As String
+    
     Dim value_location As String
+    Dim priority_location As String
+    Dim line_location As String
+    Dim op_location As String
+    Dim active_location As String
+    Dim type_location As String
+    Dim nature_location As String
+    Dim etd_location As String
     
     ' Set the location to retrive values from and to clear later
     value_location = "J4"
+    priority_location = "K4"
+    line_location = "L4"
+    op_location = "M4"
+    active_location = "N4"
+    type_location = "O4"
+    nature_location = "P4"
+    etd_location = "Q4"
     
     ' Get MO number
     mo_number = Range(value_location).Value
+    mo_priority = Range(priority_location).Value
+    mo_line = Range(line_location).Value
+    mo_op = Range(op_location).Value
+    mo_active = Range(active_location).Value
+    mo_type = Range(type_location).Value
+    mo_nature = Range(nature_location).Value
+    mo_etd = Range(etd_location).Value
     
     ' Select the cell where the MO will be add
-    If mo_number <> 0 Then
-    Range("A" & FindLastMOIndex + 1).Value = mo_number
+    If mo_number <> 0 And mo_priority <> "" And mo_line <> "" And mo_op <> "" And mo_active <> "" And mo_type <> "" And mo_nature <> "" Then
+        new_mo_row = FindLastMOIndex + 1
+        Range("A" & new_mo_row).Value = mo_number
+        Range("B" & new_mo_row).Value = mo_priority
+        Range("C" & new_mo_row).Value = mo_line
+        Range("D" & new_mo_row).Value = mo_op
+        Range("E" & new_mo_row).Value = mo_active
+        Range("F" & new_mo_row).Value = mo_type
+        Range("G" & new_mo_row).Value = mo_nature
+
     
     Else
-        MsgBox ("No MO number given")
+        MsgBox ("Some required fields are empty...")
     
     End If
     
+    If mo_etd = "" Then
+        Range("H" & new_mo_row).Value = "N/A"
+    Else
+        Range("H" & new_mo_row).Value = mo_etd
+    End If
+    
     ' Clean up "text box"
-    Range(value_location).Value = ""
+    Range(value_location, etd_location).Value = ""
     
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
@@ -357,6 +402,6 @@ End Sub
 
 
 Sub TestMacro()
-
+    Range("J4", "L4").Select
     
 End Sub
