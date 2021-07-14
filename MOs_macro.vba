@@ -228,7 +228,14 @@ Sub SortMOs(last_mo)
     'Sort Maintence Orders
 
     ' Sort all MOs
-    Range("A1", last_mo).Sort Key1:=Range("A1"), Order1:=xlAscending, Header:=xlYes
+    ' Range("A1", last_mo).Sort Key1:=Range("A1"), Order1:=xlAscending, Header:=xlYes
+    With ActiveSheet.Sort
+        .SortFields.Add Key:=Range("A1"), Order:=xlAscending
+        .SortFields.Add Key:=Range("A1"), Order:=xlAscending
+        .SetRange Range("A1:H25000")
+        .Header = xlYes
+        .Apply
+    End With
 
 End Sub
 
@@ -252,7 +259,7 @@ Sub FindMO()
 
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
-    ' SortMOs (FindLastMO)
+    SortMOs (FindLastMO)
     
     ' Loops through every MO and compare values, if it finds it selects the cell of the MO
     For i = 2 To FindLastMOIndex
@@ -348,7 +355,7 @@ Sub AddMO()
     
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
-    ' SortMOs (FindLastMO)
+    SortMOs (FindLastMO)
     
 End Sub
 
@@ -400,7 +407,7 @@ Sub DelMO()
     
     ' Delete empty MOs and sort them
     DeleteEmptyMOs (FindLastMO)
-    ' SortMOs (FindLastMO)
+    SortMOs (FindLastMO)
     
 End Sub
 
