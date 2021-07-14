@@ -6,7 +6,6 @@
 ' * implement quick find to FindLastOM and FindLastOMIndex
 '
 ' TO-FIX
-' * update delete empty MOs to detect and delete an entire row
 ' * update sort MOs to sort the entire MO line and not just the MO no.
 
 
