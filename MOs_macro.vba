@@ -286,7 +286,13 @@ Sub AddMO()
     mo_number = Range(value_location).Value
     
     ' Select the cell where the MO will be add
+    If mo_number <> 0 Then
     Range("A" & FindLastMOIndex + 1).Value = mo_number
+    
+    Else
+        MsgBox ("No MO number given")
+    
+    End If
     
     ' Clean up "text box"
     Range(value_location).Value = ""
