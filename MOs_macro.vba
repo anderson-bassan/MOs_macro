@@ -5,8 +5,6 @@
 ' * when sorting MOs by double click show a graphic legend
 ' * implement quick find to FindLastOM and FindLastOMIndex
 '
-' TO-FIX
-' * update sort MOs to sort the entire MO line and not just the MO no.
 
 
 Sub CreateDummyMOs()
@@ -216,8 +214,6 @@ Sub DeleteEmptyMOs(last_cell)
     On Error Resume Next
     ' Selects all MOs blanks and deletes them
     Range("A1", last_cell).SpecialCells(xlCellTypeBlanks).EntireRow.Delete
-    
-    Debug.Print "inside delteemptymos; last_cell: " & last_cell
     
     On Error GoTo 0
 
