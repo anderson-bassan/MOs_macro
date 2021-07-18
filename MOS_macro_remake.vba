@@ -8,11 +8,11 @@
 Sub FormatSpreadsheet()
     Dim base_width As Double
     
-    Dim sheet_title_range As String
-    
     base_width = 8.43
     
     sheet_title_range = Range("A1:ZZ1")
+    
+    Debug.Print VarType(sheet_title_range)
     
     Columns("B").ColumnWidth = base_width * 2
     Columns("D").ColumnWidth = base_width * 2
@@ -41,4 +41,10 @@ Sub FormatSpreadsheet()
     Range("G1").Font.Bold = True
     Range("H1").Font.Bold = True
     
+    With Worksheets(1).Range("A:ZZ").FormatConditions _
+        .Add(xlBlanksCondition)
+        With .Borders
+            .Color = RGB(255, 255, 255)
+        End With
+    End With
 End Sub
