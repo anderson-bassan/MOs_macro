@@ -47,4 +47,23 @@ Sub FormatSpreadsheet()
             .Color = RGB(255, 255, 255)
         End With
     End With
+    
+    With Worksheets(1).Range("A1:ZZ1").FormatConditions _
+        .Add(xlNoBlanksCondition)
+        With .Interior
+            .ColorIndex = 1
+        End With
+        
+        With .Font
+            .Bold = True
+            .ColorIndex = 2
+        End With
+    End With
+    
+    With Worksheets(1).Range("A2:ZZ999").FormatConditions _
+        .Add(xlNoBlanksCondition)
+        With .Borders
+            .Color = RGB(0, 0, 0)
+        End With
+    End With
 End Sub
