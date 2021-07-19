@@ -1,6 +1,5 @@
 ' TO-DO
 ' -----
-' * add conditional formatting to FormatSpreadsheet
 ' * add comments to code
 '
 
