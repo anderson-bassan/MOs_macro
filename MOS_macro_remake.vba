@@ -282,3 +282,19 @@ Sub DeleteEmptyMOs()
     On Error GoTo 0
 
 End Sub
+
+
+Sub SortMOs()
+    'Sort Maintence Orders
+
+    ' Sort all MOs by MO no.
+    With ActiveSheet.Sort
+        .SortFields.Add Key:=Range("A1"), Order:=xlAscending
+        .SortFields.Add Key:=Range("A1"), Order:=xlAscending
+        .SetRange Range("A1:H25000")
+        .Header = xlYes
+        .Apply
+    End With
+
+End Sub
+
