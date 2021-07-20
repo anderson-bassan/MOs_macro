@@ -1,5 +1,6 @@
 ' TO-DO
 ' * improve find algorithm
+' * make add mo dummy proof
 '
 
 
@@ -360,3 +361,60 @@ Sub FindMO()
     End If
 End Sub
 
+
+Sub AddMO()
+    ' Add a MO to the list, then delete empty cells and sorts it
+    
+    ' Declare variables
+    Dim new_mo_row As Long
+    
+    Dim mo_number As Long
+    Dim mo_priority As String
+    Dim mo_line As String
+    Dim mo_op As String
+    Dim mo_active As String
+    Dim mo_type As String
+    Dim mo_nature As String
+    Dim mo_etd As String
+    
+    ' Get MO number
+    mo_number = InputBox("número da O.M.: ", "Número da OM")
+    mo_priority = InputBox("prioridade da O.M.: ", "prioridade da OM")
+    mo_line = InputBox("linha da O.M.: ", "linha da OM")
+    mo_op = InputBox("operação da O.M.: ", "operação da OM")
+    mo_active = InputBox("ativo da O.M.: ", "ativo da OM")
+    mo_type = InputBox("tipo de manutenção da O.M.: ", "tipo de manutenção da OM")
+    mo_nature = InputBox("natureza de serviço: ", "natureza de serviço")
+    mo_etd = InputBox("tempo estimado(opcional): ", "tempo estimado")
+    
+    ' Select the cell where the MO will be add
+    If mo_number <> 0 And mo_priority <> "" And mo_line <> "" And mo_op <> "" And mo_active <> "" And mo_type <> "" And mo_nature <> "" Then
+        new_mo_row = FindLastMOIndex + 1
+        Range("A" & new_mo_row).Value = mo_number
+        Range("B" & new_mo_row).Value = mo_priority
+        Range("C" & new_mo_row).Value = mo_line
+        Range("D" & new_mo_row).Value = mo_op
+        Range("E" & new_mo_row).Value = mo_active
+        Range("F" & new_mo_row).Value = mo_type
+        Range("G" & new_mo_row).Value = mo_nature
+
+        If mo_etd = "" Then
+            Range("H" & new_mo_row).Value = "N/A"
+            
+        Else
+            Range("H" & new_mo_row).Value = mo_etd
+            
+        End If
+        
+        FindMOByNumber (mo_number)
+    
+    Else
+        ' Shows a message in case there's empty required fields
+        MsgBox ("Alguns campos obrigatórios estão vazios...")
+    
+    End If
+    
+    ' Delete empty MOs and sort them
+    CleanUpTable
+    
+End Sub
