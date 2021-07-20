@@ -1,7 +1,3 @@
-' TO-DO
-' -----
-' * add comments to code
-'
 
 
 Sub FormatSpreadsheet()
@@ -79,3 +75,4 @@ Sub FormatSpreadsheet()
         End With
     End With
 End Sub
+
