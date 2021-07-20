@@ -1,3 +1,6 @@
+' TO-DO
+' * improve find algorithm
+'
 
 
 Sub FormatSpreadsheet()
@@ -230,3 +233,28 @@ Sub CreateDummyMOs()
 
 
 End Sub
+
+
+Function FindLastMO() As String
+    ' Find the last MO of the spreadsheet and returns it
+        
+    ' Declare variables
+    Dim last_mo As String
+    Dim current_mo As Long
+    Dim total_cells As Long
+    
+    ' Set the number of cells to check
+    total_cells = 25000
+    
+    ' Run throught the first X (total_cells) cells until it finds the one with content
+    For i = total_cells To 2 Step -1
+        If Not IsEmpty(Cells(i, 1)) And last_mo = "" Then
+            last_mo = "A" & i
+        End If
+    Next i
+    
+    ' Return the last MO index
+    FindLastMO = last_mo
+        
+End Function
+
