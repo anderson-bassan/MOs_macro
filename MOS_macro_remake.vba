@@ -285,9 +285,9 @@ End Sub
 
 
 Sub SortMOs()
-    'Sort Maintence Orders
+    ' Sorts Maintence Orders
 
-    ' Sort all MOs by MO no.
+    ' Sorts all MOs by MO no.
     With ActiveSheet.Sort
         .SortFields.Add Key:=Range("A1"), Order:=xlAscending
         .SortFields.Add Key:=Range("A1"), Order:=xlAscending
@@ -296,5 +296,13 @@ Sub SortMOs()
         .Apply
     End With
 
+End Sub
+
+
+Sub CleanUpTable()
+    ' Sorts the entire table and clean up empty cells
+
+    DeleteEmptyMOs
+    SortMOs
 End Sub
 
