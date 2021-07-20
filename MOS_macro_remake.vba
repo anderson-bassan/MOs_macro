@@ -1,6 +1,7 @@
 ' TO-DO
 ' * improve find algorithm
 ' * make add mo dummy proof
+' * add function to create back-ups csv files
 '
 
 
@@ -412,6 +413,50 @@ Sub AddMO()
         ' Shows a message in case there's empty required fields
         MsgBox ("Alguns campos obrigatórios estão vazios...")
     
+    End If
+    
+    ' Delete empty MOs and sort them
+    CleanUpTable
+    
+End Sub
+
+
+Sub DelMO()
+    ' Delete a MO from the list, then delete empty cells and sorts it
+    
+    ' Declare Variables
+    Dim mo_number As String
+    Dim current_mo_value As Long
+    Dim found_mo As Boolean
+    Dim value_location As String
+        
+    ' Set mo_number to the "text box" number
+    mo_number = InputBox("Número da O.M.: ", "número da O.M.")
+    
+    ' Set found_mo to false to check if it was found later
+    found_mo = False
+    
+    ' Loops through every MO and compare values, if it finds it deletes the cell of the MO
+    For i = 2 To FindLastMOIndex
+        current_mo_value = Range("A" & i).Value
+        
+        If current_mo_value = CLng(mo_number) Then
+            ' Ask the user if he/she/it is sure that he/she/it wants to delte the MO
+            del_mo_answer = MsgBox("Você tem certeza? ", vbQuestion + vbYesNo + vbDefaultButton2, "Você tem certeza? ")
+            
+            ' Deletes when users confirm
+            If del_mo_answer = vbYes Then
+                Range("A" & i).EntireRow.Delete
+                found_mo = True
+                
+            End If
+            
+        End If
+    Next i
+    
+    ' Checks if the MO was found, otherwise sends a message
+    If Not found_mo Or mo_number = "" Then
+        MsgBox ("Não foi possível deletar a O.M. ...")
     End If
     
     ' Delete empty MOs and sort them
