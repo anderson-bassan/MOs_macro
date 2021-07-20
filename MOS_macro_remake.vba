@@ -5,20 +5,29 @@
 
 
 Sub FormatSpreadsheet()
+    ' declare the ranges
+    Dim title_range As String
+    Dim non_title_range As String
+    Dim empty_cells_range As String
+    
+    ' set the base width of the columns
     Dim base_width As Double
     
     base_width = 8.43
     
-    sheet_title_range = Range("A1:ZZ1")
+    ' Set the ranges that will be used
+    title_range = "A1:H1"
+    non_title_range = "A2:H999"
+    empty_cells_range = "A:ZZ"
     
-    Debug.Print VarType(sheet_title_range)
-    
+    ' change the width of the used columns
     Columns("B").ColumnWidth = base_width * 2
     Columns("D").ColumnWidth = base_width * 2
     Columns("F").ColumnWidth = base_width * 2.5
     Columns("G").ColumnWidth = base_width * 2.5
     Columns("H").ColumnWidth = base_width * 2.5
     
+    ' add the values to the empty columns
     Range("A1").Value = UCase("ordem")
     Range("B1").Value = UCase("prioridade")
     Range("C1").Value = UCase("linha")
@@ -28,26 +37,29 @@ Sub FormatSpreadsheet()
     Range("G1").Value = UCase("natureza do serviço")
     Range("H1").Value = UCase("tempo estimado")
     
-    Range("A1:H1").VerticalAlignment = xlCenter
-    Range("A1:H1").HorizontalAlignment = xlCenter
+    ' center the table titles
+    Range(title_range).VerticalAlignment = xlCenter
+    Range(title_range).HorizontalAlignment = xlCenter
     
-    Range("A1").Font.Bold = True
-    Range("B1").Font.Bold = True
-    Range("C1").Font.Bold = True
-    Range("D1").Font.Bold = True
-    Range("E1").Font.Bold = True
-    Range("F1").Font.Bold = True
-    Range("G1").Font.Bold = True
-    Range("H1").Font.Bold = True
+    ' center table content
+    Range(non_title_range).VerticalAlignment = xlCenter
+    Range(non_title_range).HorizontalAlignment = xlCenter
     
-    With Worksheets(1).Range("A:ZZ").FormatConditions _
+    
+    ' change the font weight of the table titles
+    Range(title_range).Font.Bold = True
+    
+    ' add conditional formatting rules
+    ' makes empty cells blank
+    With Worksheets(1).Range(empty_cells_range).FormatConditions _
         .Add(xlBlanksCondition)
         With .Borders
             .Color = RGB(255, 255, 255)
         End With
     End With
     
-    With Worksheets(1).Range("A1:ZZ1").FormatConditions _
+    ' makes the title cells black with a white bold text
+    With Worksheets(1).Range(title_range).FormatConditions _
         .Add(xlNoBlanksCondition)
         With .Interior
             .ColorIndex = 1
@@ -59,7 +71,8 @@ Sub FormatSpreadsheet()
         End With
     End With
     
-    With Worksheets(1).Range("A2:ZZ999").FormatConditions _
+    ' adds a black borders to filled cells that are not the title cells
+    With Worksheets(1).Range(non_title_range).FormatConditions _
         .Add(xlNoBlanksCondition)
         With .Borders
             .Color = RGB(0, 0, 0)
