@@ -306,3 +306,57 @@ Sub CleanUpTable()
     SortMOs
 End Sub
 
+
+Sub FindMOByNumber(mo_number)
+    ' Declare variables
+    Dim current_mo_value As Long
+    Dim found_mo As Boolean
+    Dim value_location As String
+    
+    ' Sets found mo to false, so it knows latter when it finds it
+    found_mo = False
+    
+    ' Delete empty MOs and sorts the whole table
+    CleanUpTable
+    
+    ' Loops through every MO and compare values, if it finds it selects the cell of the MO
+    For i = 2 To FindLastMOIndex
+        current_mo_value = Range("A" & i).Value
+        
+        If current_mo_value = mo_number Then
+            Range("A" & i).EntireRow.Select
+            found_mo = True
+            
+        End If
+    Next i
+    
+    ' If no MO is found then pop-up a message box saying such
+    If found_mo = False Then
+        MsgBox ("OM não encontrada...")
+        
+    End If
+End Sub
+
+
+Sub FindMO()
+    ' MO by the value given by the user
+
+    ' Declare variables
+    Dim mo_number As String
+
+    ' Gets the number from the user
+    mo_number = InputBox("Qual o número da OM? ", "Número da OM")
+
+    If mo_number <> "" Then
+        ' Search MO by the value
+        FindMOByNumber (mo_number)
+    
+    Else
+        ' Informs the user that it was not possible to find the OM
+        If found_mo = False Then
+            MsgBox ("Não foi possível buscar a OM...")
+        
+        End If
+    End If
+End Sub
+
