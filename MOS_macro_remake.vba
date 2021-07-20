@@ -4,12 +4,12 @@
 
 
 Sub FormatSpreadsheet()
-    ' declare the ranges
+    ' Declare the ranges
     Dim title_range As String
     Dim non_title_range As String
     Dim empty_cells_range As String
     
-    ' set the base width of the columns
+    ' Set the base width of the columns
     Dim base_width As Double
     
     base_width = 8.43
@@ -19,14 +19,14 @@ Sub FormatSpreadsheet()
     non_title_range = "A2:H999"
     empty_cells_range = "A:ZZ"
     
-    ' change the width of the used columns
+    ' Change the width of the used columns
     Columns("B").ColumnWidth = base_width * 2
     Columns("D").ColumnWidth = base_width * 2
     Columns("F").ColumnWidth = base_width * 2.5
     Columns("G").ColumnWidth = base_width * 2.5
     Columns("H").ColumnWidth = base_width * 2.5
     
-    ' add the values to the empty columns
+    ' Add the values to the empty columns
     Range("A1").Value = UCase("ordem")
     Range("B1").Value = UCase("prioridade")
     Range("C1").Value = UCase("linha")
@@ -36,20 +36,20 @@ Sub FormatSpreadsheet()
     Range("G1").Value = UCase("natureza do serviço")
     Range("H1").Value = UCase("tempo estimado")
     
-    ' center the table titles
+    ' Center the table titles
     Range(title_range).VerticalAlignment = xlCenter
     Range(title_range).HorizontalAlignment = xlCenter
     
-    ' center table content
+    ' Center table content
     Range(non_title_range).VerticalAlignment = xlCenter
     Range(non_title_range).HorizontalAlignment = xlCenter
     
     
-    ' change the font weight of the table titles
+    ' Change the font weight of the table titles
     Range(title_range).Font.Bold = True
     
-    ' add conditional formatting rules
-    ' makes empty cells blank
+    ' Add conditional formatting rules
+    ' Makes empty cells blank
     With Worksheets(1).Range(empty_cells_range).FormatConditions _
         .Add(xlBlanksCondition)
         With .Borders
@@ -57,7 +57,7 @@ Sub FormatSpreadsheet()
         End With
     End With
     
-    ' makes the title cells black with a white bold text
+    ' Makes the title cells black with a white bold text
     With Worksheets(1).Range(title_range).FormatConditions _
         .Add(xlNoBlanksCondition)
         With .Interior
@@ -70,7 +70,7 @@ Sub FormatSpreadsheet()
         End With
     End With
     
-    ' adds a black borders to filled cells that are not the title cells
+    ' Adds black borders to filled cells that are not the title cells
     With Worksheets(1).Range(non_title_range).FormatConditions _
         .Add(xlNoBlanksCondition)
         With .Borders
@@ -120,7 +120,7 @@ Sub CreateDummyMOs()
         ' Get a random number that will be the MO nature type
         nature_type_no = Int((2 - 0) * Math.Rnd() + 1)
     
-        ' set random MOs types
+        ' Set random MOs types
         If nature_type_no = 1 Then
             Cells(i, nature_pos) = "ELE"
             
@@ -265,3 +265,20 @@ Function FindLastMO() As String
     FindLastMO = "A" & FindLastMOIndex
         
 End Function
+
+
+Sub DeleteEmptyMOs()
+    ' Find and delete all empty cells
+    
+    ' Variable Declaration
+    Dim last_cell As String
+    
+    ' Set the last cell, that will be used to search between all cells in the table by empty cells
+    last_cell = "G" & FindLastMOIndex
+    
+    On Error Resume Next
+    ' Deletes all lines with empty cells, except for ETD as it's optional
+    Range("A1", last_cell).SpecialCells(xlCellTypeBlanks).EntireRow.Delete
+    On Error GoTo 0
+
+End Sub
