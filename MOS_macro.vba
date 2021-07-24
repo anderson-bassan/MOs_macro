@@ -252,8 +252,13 @@ Function FindLastMOIndex() As Integer
     For i = total_cells To 2 Step -1
         If Not IsEmpty(Cells(i, 1)) And last_mo_index = 0 Then
             last_mo_index = i
+
         End If
     Next i
+    
+    If last_mo_index = 0 Then
+        last_mo_index = 1
+    End If
     
     ' Return the last MO index
     FindLastMOIndex = last_mo_index
@@ -369,7 +374,7 @@ Sub AddMO()
     ' Declare variables
     Dim new_mo_row As Long
     
-    Dim mo_number As Long
+    Dim mo_number As String
     Dim mo_priority As String
     Dim mo_line As String
     Dim mo_op As String
@@ -388,8 +393,17 @@ Sub AddMO()
     mo_nature = InputBox("natureza de serviço: ", "natureza de serviço")
     mo_etd = InputBox("tempo estimado(opcional): ", "tempo estimado")
     
+    ' Verify if MO number is valid
+    If IsNumeric(mo_number) Then
+        Debug.Print "It's numeric" & FindLastMOIndex
+    
+    Else
+        Debug.Print "It's not numeric" & FindLastMOIndex
+        
+    End If
+    
     ' Select the cell where the MO will be add
-    If mo_number <> 0 And mo_priority <> "" And mo_line <> "" And mo_op <> "" And mo_active <> "" And mo_type <> "" And mo_nature <> "" Then
+    If CLng(mo_number) <> 0 And mo_priority <> "" And mo_line <> "" And mo_op <> "" And mo_active <> "" And mo_type <> "" And mo_nature <> "" Then
         new_mo_row = FindLastMOIndex + 1
         Range("A" & new_mo_row).Value = mo_number
         Range("B" & new_mo_row).Value = mo_priority
@@ -463,3 +477,5 @@ Sub DelMO()
     CleanUpTable
     
 End Sub
+
+
