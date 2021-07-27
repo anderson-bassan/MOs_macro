@@ -1,7 +1,8 @@
 ' TO-DO
 ' * improve find algorithm
 ' * make add mo dummy proof
-' * make impossible to add repeated cells
+' * add reprogrammed times to add mo
+' * add remove repeated mos to clean up
 ' * add function to create back-ups csv files
 '
 
