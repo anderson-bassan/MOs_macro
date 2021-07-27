@@ -1,6 +1,7 @@
 ' TO-DO
 ' * improve find algorithm
 ' * make add mo dummy proof
+' * make impossible to add repeated cells
 ' * add function to create back-ups csv files
 '
 
@@ -477,5 +478,7 @@ Sub DelMO()
     CleanUpTable
     
 End Sub
+
+
 
 
