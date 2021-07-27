@@ -369,6 +369,32 @@ Sub FindMO()
 End Sub
 
 
+Function DoesMOExist(mo_number As String)
+    ' Declare variables
+    Dim last_mo As Integer
+    Dim mo_exist As Boolean
+    
+    ' Set the mo_exist to false and the last row in the table
+    mo_exist = False
+    last_mo_index = FindLastMOIndex
+    
+    ' Go through all cells verifying if the mo exist
+    For i = last_mo_index To 1 Step -1
+        ' If it find the mo number it does exist, else it still dosen't exist
+        
+        Debug.Print "Inside does_mo_exist. MO value: " & Cells(i, 1).Value
+        If mo_number = Cells(i, 1).Value Then
+            mo_exist = True
+            
+        End If
+    Next i
+    
+    ' Returns if the mo exist
+    DoesMOExist = mo_exist
+    
+End Function
+
+
 Sub AddMO()
     ' Add a MO to the list, then delete empty cells and sorts it
     
@@ -393,34 +419,43 @@ Sub AddMO()
     mo_type = InputBox("tipo de manutenção da O.M.: ", "tipo de manutenção da OM")
     mo_nature = InputBox("natureza de serviço: ", "natureza de serviço")
     mo_etd = InputBox("tempo estimado(opcional): ", "tempo estimado")
-    
-    ' Select the cell where the MO will be add
-    If CLng(mo_number) <> 0 And mo_priority <> "" And mo_line <> "" And mo_op <> "" And mo_active <> "" And mo_type <> "" And mo_nature <> "" Then
-        new_mo_row = FindLastMOIndex + 1
-        Range("A" & new_mo_row).Value = mo_number
-        Range("B" & new_mo_row).Value = mo_priority
-        Range("C" & new_mo_row).Value = mo_line
-        Range("D" & new_mo_row).Value = mo_op
-        Range("E" & new_mo_row).Value = mo_active
-        Range("F" & new_mo_row).Value = mo_type
-        Range("G" & new_mo_row).Value = mo_nature
 
-        If mo_etd = "" Then
-            Range("H" & new_mo_row).Value = "N/A"
-            
-        Else
-            Range("H" & new_mo_row).Value = mo_etd
-            
-        End If
+    If Not DoesMOExist(mo_number) Then
+        ' Add Mo
         
-        FindMOByNumber (mo_number)
+        ' Select the cell where the MO will be add
+        If CLng(mo_number) <> 0 And mo_priority <> "" And mo_line <> "" And mo_op <> "" And mo_active <> "" And mo_type <> "" And mo_nature <> "" Then
+            new_mo_row = FindLastMOIndex + 1
+            Range("A" & new_mo_row).Value = mo_number
+            Range("B" & new_mo_row).Value = mo_priority
+            Range("C" & new_mo_row).Value = mo_line
+            Range("D" & new_mo_row).Value = mo_op
+            Range("E" & new_mo_row).Value = mo_active
+            Range("F" & new_mo_row).Value = mo_type
+            Range("G" & new_mo_row).Value = mo_nature
     
+            If mo_etd = "" Then
+                Range("H" & new_mo_row).Value = "N/A"
+                
+            Else
+                Range("H" & new_mo_row).Value = mo_etd
+                
+            End If
+            
+            FindMOByNumber (mo_number)
+        
+        Else
+            ' Shows a message in case there's empty required fields
+            MsgBox ("Alguns campos obrigatórios estão vazios...")
+        
+        End If
+
     Else
-        ' Shows a message in case there's empty required fields
-        MsgBox ("Alguns campos obrigatórios estão vazios...")
+        ' Insert Reprogrammed
+        MsgBox ("A O.M. já existe... ")
     
     End If
-    
+       
     ' Delete empty MOs and sort them
     CleanUpTable
     
@@ -468,4 +503,13 @@ Sub DelMO()
     ' Delete empty MOs and sort them
     CleanUpTable
     
+End Sub
+
+
+Sub TestSub()
+    If DoesMOExist("226649") Then
+        Debug.Print "MO exist"
+    Else
+        Debug.Print "MO does not exist"
+    End If
 End Sub
