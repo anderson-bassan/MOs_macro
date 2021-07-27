@@ -394,15 +394,6 @@ Sub AddMO()
     mo_nature = InputBox("natureza de serviço: ", "natureza de serviço")
     mo_etd = InputBox("tempo estimado(opcional): ", "tempo estimado")
     
-    ' Verify if MO number is valid
-    If IsNumeric(mo_number) Then
-        Debug.Print "It's numeric" & FindLastMOIndex
-    
-    Else
-        Debug.Print "It's not numeric" & FindLastMOIndex
-        
-    End If
-    
     ' Select the cell where the MO will be add
     If CLng(mo_number) <> 0 And mo_priority <> "" And mo_line <> "" And mo_op <> "" And mo_active <> "" And mo_type <> "" And mo_nature <> "" Then
         new_mo_row = FindLastMOIndex + 1
@@ -478,7 +469,3 @@ Sub DelMO()
     CleanUpTable
     
 End Sub
-
-
-
-
