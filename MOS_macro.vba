@@ -5,6 +5,9 @@
 ' * add remove repeated mos to clean up
 ' * add function to create back-ups csv files
 '
+' TO-FIX
+' *  We found a problem with some content in XXXXX.xlsm. Do you want us to try to recover as much as possible? 
+'
 
 
 Sub FormatSpreadsheet()
