@@ -6,7 +6,7 @@
 ' * add function to create back-ups csv files
 '
 ' TO-FIX
-' *  We found a problem with some content in XXXXX.xlsm. Do you want us to try to recover as much as possible? 
+' *  We found a problem with some content in XXXXX.xlsm. Do you want us to try to recover as much as possible? ID: 7
 '
 
 
@@ -315,7 +315,7 @@ Sub CleanUpTable()
     ' Sorts the entire table and clean up empty cells
 
     DeleteEmptyMOs
-    SortMOs
+    ' SortMOs
 End Sub
 
 
@@ -385,8 +385,6 @@ Function DoesMOExist(mo_number As String)
     ' Go through all cells verifying if the mo exist
     For i = last_mo_index To 1 Step -1
         ' If it find the mo number it does exist, else it still dosen't exist
-        
-        Debug.Print "Inside does_mo_exist. MO value: " & Cells(i, 1).Value
         If mo_number = Cells(i, 1).Value Then
             mo_exist = True
             
@@ -511,9 +509,20 @@ End Sub
 
 
 Sub TestSub()
-    If DoesMOExist("226649") Then
-        Debug.Print "MO exist"
-    Else
-        Debug.Print "MO does not exist"
-    End If
+    ' Tries to find where the bug (id: 7) is occurring
+       
+    ' FormatSpreadsheet: OK
+    ' CreateDummyMOs: OK
+    ' FindLastMOIndex: OK
+    ' FindLastMO: OK
+    ' DeleteEmptyMOs: OK
+    ' SortMOs: NOT OK
+    ' FindMO: OK obs.: it didn't worked before deactivating sortMOs
+    ' DoesMOExist: OK
+    ' AddMO: OK
+    ' DelMO: OK
+   
+  
 End Sub
+
+
