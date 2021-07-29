@@ -1,9 +1,32 @@
-' TO-DO
-' * improve find algorithm
+' ===================== TO-DO =====================
+'
+'
+' * update format sub
+'
+' desc.:
+'   * remove grid lines from view
+'
+'   * add new coluns to the spreadsheet
+'
+'   * create the ranges with redirect and
+'     referenciate them (if possible)
+'
+'   * remove the conditional formatting
+'     to make emptcells have white
+'     borders
+'
 ' * make add mo dummy proof
-' * add reprogrammed times to add mo
+' * add pages no. to add mos
+' * add descriptions to add mos
+' * add current state to add mos
+' * add reprogrammed times to add mos
 ' * add remove repeated mos to clean up
+' * improve find algorithm to unlimeted rows
 ' * add function to create back-ups csv files
+'
+'
+' =================================================
+'
 '
 
 
