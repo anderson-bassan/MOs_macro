@@ -302,11 +302,14 @@ Sub SortMOs()
     ' Sorts all MOs by MO no.
     With ActiveSheet.Sort
         .SortFields.Add Key:=Range("A1"), Order:=xlAscending
-        .SortFields.Add Key:=Range("A1"), Order:=xlAscending
+        ' .SortFields.Add Key:=Range("A1"), Order:=xlAscending
         .SetRange Range("A1:H25000")
         .Header = xlYes
         .Apply
     End With
+    
+    ' Avoid stacking up sort key informations
+    ActiveSheet.Sort.SortFields.Clear
 
 End Sub
 
@@ -315,7 +318,7 @@ Sub CleanUpTable()
     ' Sorts the entire table and clean up empty cells
 
     DeleteEmptyMOs
-    ' SortMOs
+    SortMOs
 End Sub
 
 
@@ -522,7 +525,13 @@ Sub TestSub()
     ' AddMO: OK
     ' DelMO: OK
    
-  
+    ' Trying to fix the bug in sort function
+    ' Works without the repeated line: OK
+    ' works fine, but the bugs still happens after saving
+    ' Works with the clear sort references afterwards: OK
+    
+    ' Using the changed Sub in the previous disabled code
+    ' Works with the changes: OK
 End Sub
 
 
